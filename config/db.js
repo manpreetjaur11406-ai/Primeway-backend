@@ -5,11 +5,11 @@ const mysql = require("mysql2");
 // =========================
 
 const db = mysql.createPool({
-  host: process.env.DB_HOST,
+  host: process.env.DB_HOST?.trim(),
   port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
+  user: process.env.DB_USER?.trim(),
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  database: process.env.DB_NAME?.trim(),
 
   ssl: {
     rejectUnauthorized: false,
@@ -30,7 +30,9 @@ db.getConnection((err, connection) => {
     return;
   }
 
+  console.log("=================================");
   console.log("MySQL connected successfully!");
+  console.log("=================================");
 
   connection.release();
 });
