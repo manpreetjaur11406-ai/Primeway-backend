@@ -5,14 +5,14 @@ const mysql = require("mysql2");
 // =========================
 
 const db = mysql.createPool({
-  host: process.env.DB_HOST?.trim(),
-  port: Number(process.env.DB_PORT?.trim()),
-  user: process.env.DB_USER?.trim(),
-  password: process.env.DB_PASSWORD?.trim(),
-  database: process.env.DB_NAME?.trim(),
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 
   ssl: {
-    rejectUnauthorized: true,
+    rejectUnauthorized: false,
   },
 
   waitForConnections: true,
@@ -26,7 +26,7 @@ const db = mysql.createPool({
 
 db.getConnection((err, connection) => {
   if (err) {
-    console.error("MySQL connection failed:", err.message);
+    console.error("MySQL connection failed:", err);
     return;
   }
 
